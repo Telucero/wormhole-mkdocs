@@ -1,62 +1,16 @@
-name: Deploy Docs
+name: Test Deploy Docs (Wormhole)
+
 on:
-  workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Branch to build and deploy documentation from'
-        required: true
-        default: 'main'
+  workflow_dispatch: # Triggered manually from the Actions tab
 
-permissions:
-  contents: write
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: true  # Ensures submodules are initialized & updated
-          fetch-depth: 0     # Ensures full history for proper branch handling
-
-      - name: Configure Git Credentials
-        run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          
-      - name: Checkout submodule branch
-        run: |
-          cd wormhole-docs
-          git checkout ${{ inputs.branch }}  # Switch to the specified branch
-          git pull origin ${{ inputs.branch }}  # Ensure it's up to date
-          
-      - uses: actions/setup-python@v5
-        with:
-          python-version: 3.x
-      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
-      - uses: actions/cache@v4
-        with:
-          key: mkdocs-material-${{ env.cache_id }}
-          path: .cache
-          restore-keys: |
-            mkdocs-material-
-            
-      - name: Install System Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y python3-dev build-essential
-          
-      - name: Install pip requirements
-        run: |
-          # upgrade pip
-          python -m pip install --upgrade pip setuptools 'cython<3.0.0' wheel
-          # install dependencies quietly
-          python -m pip install -r requirements.txt
-      
-      - name: Update image paths in Markdown files
-        run: |
-          # Change /docs/ for /wormhole/mkdocs in all .md files inside wormhole-docs and all .md and .json files inside .snippets
-          find wormhole-docs -type f \( -name "*.md" -or \( -path "wormhole-docs/.snippets/*" -a \( -name "*.md" -or -name "*.json" \) \) \) -exec sed -i -e 's|](/docs/|](/wormhole-mkdocs/|g' -e 's|href="/docs/|href="/wormhole-mkdocs/|g' {} \;
-          find material-overrides -type f -name "*.html" -exec sed -i -e 's|/docs/|/wormhole-mkdocs/|g' {} \;
-      
-      - name: Deploy Docs
-        run: mkdocs gh-deploy --force --clean --site-dir ./site
+  call-docs-deploy:
+    uses: Telucero/workflows/.github/workflows/deploy-docs.yml@Central_repo_test
+    with:
+      branch: main                          # Branch to deploy from in the docs repo
+      repository: wormhole-foundation/wormhole-docs
+      path: wormhole-docs                   # Folder to clone the docs into
+      url_prefix: wormhole-mkdocs           # Prefix used for URL rewriting
+      submodules: true                      # Optional: pass true if using git submodules
+    permissions:
+      contents: write  # Needed to push to gh-pages
