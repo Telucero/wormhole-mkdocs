@@ -505,20 +505,6 @@
                     </li>
                   
                 
-                  
-                    <li class="md-tab__item">
-                      <a href="../../../learn/ai-resources/">
-                        <div class="icon-col">
-                          
-                          <img class="dropdown-icon" src="/docs/assets/images/dropdown-icons/ai-resources.svg" alt="AI Resources" loading="lazy">
-                        </div>
-                        <div class="text-col">
-                          <span class="dropdown-title">AI Resources</span>
-                        </div>
-                      </a>
-                    </li>
-                  
-                
               </ul>
             </li>
           
@@ -3356,9 +3342,6 @@
             
             
           
-            
-            
-          
         
         
           
@@ -4024,21 +4007,6 @@
   
               
             
-              
-                
-    
-    
-    
-      <li class="md-nav__item">
-        <a href="../../../learn/ai-resources/" class="md-nav__link">
-          AI Resources
-          
-        </a>
-      </li>
-    
-  
-              
-            
             </ul>
           </div>
         </nav>
@@ -4319,7 +4287,7 @@
 </span></code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>To reduce transaction confirmation time, you can lower the consistency level using the <a href="https://github.com/wormhole-foundation/wormhole/blob/v2.30.0/sdk/js/src/relayer/relayer/send.ts#L33" target="_blank"><code>sendToEvm</code></a> method.</p>
+<p>To reduce transaction confirmation time, you can lower the consistency level using the <a href="https://github.com/wormhole-foundation/wormhole/blob/v2.33.0/sdk/js/src/relayer/relayer/send.ts#L33" target="_blank"><code>sendToEvm</code></a> method.</p>
 </div>
 <p>The <code>sendPayloadToEvm</code> method is marked <code>payable</code> to receive fee payment for the transaction. The value to attach to the invocation is determined by calling the <code>quoteEVMDeliveryPrice</code>, which provides an estimate of the cost of gas on the target chain.</p>
 <div class="language-solidity highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kt">function</span><span class="w"> </span><span class="nv">quoteEVMDeliveryPrice</span><span class="p">(</span>
