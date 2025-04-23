@@ -7,7 +7,7 @@ jobs:
   call-docs-deploy:
     uses: Telucero/workflows/.github/workflows/deploy-docs.yml@Central_repo_test # change this
     with:
-      branch: wormhole_test                         # Branch to deploy from in the docs repo
+      branch: main                         # Branch to deploy from in the docs repo
       repository: Telucero/wormhole-docs
       path: wormhole-docs                   # Folder to clone the docs into
       url_prefix: wormhole-mkdocs           # Prefix used for URL rewriting
