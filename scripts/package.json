@@ -7,7 +7,8 @@
     "update": "npx npm-check-updates -u && npm install --silent",
     "generate": "npx tsx src/index.ts",
     "check:consts": "npx tsx src/check.ts",
-    "check:links": "find ../docs -name \\*.md -print0 | xargs -0 -n1 npx markdown-link-check"
+    "check:links": "find ../docs -name \\*.md -print0 | xargs -0 -n1 npx markdown-link-check",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,html,sol}\""
   },
   "keywords": [],
   "author": "",
@@ -15,7 +16,9 @@
   "devDependencies": {
     "@types/node": "^22.14.0",
     "markdown-link-check": "^3.13.7",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "prettier": "^3.2.4",
+    "prettier-plugin-solidity": "^1.0.0"
   },
   "dependencies": {
     "@wormhole-foundation/sdk": "1.14.2",

@@ -60,3 +60,26 @@ mkdocs serve --watch-theme
 ```
 
 Otherwise, you'll need to stop the server (`control + C`) and restart it (`mkdocs serve`) to see the changes.
+
+## prettier 
+The following command automatically formats:
+
+All *.json files in scripts/src/chains/**
+
+All *.js files in the scripts/ directory
+
+```bash
+
+npx prettier --write scripts/src/chains/**/*.json scripts/**/*.js
+
+### Configuration
+Prettier settings are defined in a .prettierrc.js file at the root of the project (inside mkdocs/). It includes:
+
+- 2-space indentation
+
+- Trailing commas (where valid, except in JSON)
+
+- Single quotes for JavaScript
+
+- Specific parser settings for JSON and JS files
+

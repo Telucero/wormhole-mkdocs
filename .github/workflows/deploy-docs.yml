@@ -1,16 +1,19 @@
-name: Test Deploy Docs (Wormhole)
+name: Deploy Docs
 
 on:
-  workflow_dispatch: # Triggered manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to build and deploy documentation from"
+        required: true
+        default: "main"
 
 jobs:
-  call-docs-deploy:
-    uses: Telucero/workflows/.github/workflows/deploy-docs.yml@Central_repo_test # change this
+  deploy:
+    uses: Telucero/workflows/.github/workflows/deploy-docs.yml@main
     with:
-      branch: main                         # Branch to deploy from in the docs repo
-      repository: Telucero/wormhole-docs
-      path: wormhole-docs                   # Folder to clone the docs into
-      url_prefix: wormhole-mkdocs           # Prefix used for URL rewriting
-      submodules: true                      # Optional: pass true if using git submodules
-    permissions:
-      contents: write  # Needed to push to gh-pages
+      branch: ${{ inputs.branch }}
+      repository: wormhole-foundation/wormhole-docs
+      path: wormhole-docs
+      url_prefix: wormhole-mkdocs
+      submodules: true
