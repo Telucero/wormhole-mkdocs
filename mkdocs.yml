@@ -10,7 +10,7 @@ extra_css:
   - assets/stylesheets/wormhole.css
   - assets/stylesheets/copy-to-llm.css
 extra_javascript:
-  - js/copy-to-llms.js
+  - javascript/copy-to-llms.js
 theme:
   name: material
   custom_dir: material-overrides
@@ -84,6 +84,20 @@ markdown_extensions:
       title: Sections
       permalink: ＃
 plugins:
+  - i18n:
+        docs_structure: folder
+        fallback_to_default: true
+        languages:
+          - locale: zh
+            name: Chinese
+            build: true
+          - locale: id
+            name: Indonesian
+            build: true
+          - locale: en
+            name: English
+            default: true
+            build: true
   - search
   - awesome-nav
   - resolve_md:
@@ -94,7 +108,7 @@ plugins:
       minify_css: true
       cache_safe: true
       js_files:
-        - js/copy-to-llms.js
+        - javascript/copy-to-llms.js
       css_files:
         - assets/stylesheets/terminal.css
         - assets/stylesheets/spantable-neoteroi.css
